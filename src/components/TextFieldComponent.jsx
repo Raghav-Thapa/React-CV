@@ -1,16 +1,16 @@
-export const TextField = ({title, handleSubmitFirstName, name, fname} ) => {
+export const TextField = ({title, handleSubmit, name, value, setValue, type} ) => {
   return (
     <div>
       {title}
       <input
         className=" border border-black"
-        type="text"
+        type={type}
         name={name}
-        ref={fname}
-        // onChange={(event) => setFirstName(event.target.value)}
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
       />{" "}
       <br />
-      <button onClick={handleSubmitFirstName}>Submit</button>
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   );
 };
