@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { TextField } from "../components/TextFieldComponent";
 import { UserContext } from "../contexts/UserContext";
+import { NavLink } from "react-router-dom";
 
 const FormPage = () => {
   const {
@@ -110,6 +111,7 @@ const FormPage = () => {
               }`}
             ></i>
           </div>
+          <NavLink to="/"> Generate My CV</NavLink>
         </div>
       </div>
       <div className="w-3/4 h-screen bg-stone-50 ">
@@ -192,7 +194,7 @@ const FormPage = () => {
             </h1>
             <div className="overflow-scroll overflow-x-hidden h-3/4 ">
               {educations.map((education, index) => (
-                <>
+                <div key={index}>
                   <div className="grid grid-cols-2 " key={index}>
                     <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
                       <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
@@ -282,7 +284,7 @@ const FormPage = () => {
                     <br />
                   </div>
                   <hr className="h-0.5 mt-5 mb-2 bg-stone-300" />
-                </>
+                </div>
               ))}
 
               <button

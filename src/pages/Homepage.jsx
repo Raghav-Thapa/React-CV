@@ -51,10 +51,10 @@ const HomePage = () => {
             </h1>
             {educationDetail.map((eduDetail, index) => (
               <div className="mb-4" key={index}>
-                <h3 className="font-serif text-stone-600 text-lg">
+                <h3 className="font-serif text-stone-600 text-lg capitalize">
                   Title of Study {eduDetail.degree}
                 </h3>
-                <h3 className="font-serif text-stone-600 text-lg">
+                <h3 className="font-serif text-stone-600 text-lg capitalize">
                   Name of Institute {eduDetail.institute}
                 </h3>
                 <h3 className="font-serif text-stone-600 text-md">
@@ -123,7 +123,8 @@ const HomePage = () => {
                 <h3 className="font-serif text-stone-600 text-lg">
                   Company Name {expList.company}| 2018-2023
                 </h3>
-                <p className="mt-1">{expList.detail}
+                <p className="mt-1">
+                  {expList.detail}
                   Description of work <br /> Lorem ipsum, dolor sit amet
                   consectetur adipisicing elit. Dolor harum assumenda et ipsa,
                   ut recusandae, necessitatibus soluta beatae non nemo qui
