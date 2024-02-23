@@ -11,6 +11,9 @@ export const UserInfo = () => {
     setNumber,
     setLocation,
     setProfileDescription,
+    setEducationDetail,
+    setSkillList,
+    setExperiencesList,
   } = useContext(UserContext);
   const [name, setName] = useState("");
   const [currentRole, setCurrentRole] = useState("");
@@ -21,6 +24,10 @@ export const UserInfo = () => {
 
   const [educations, setEducations] = useState([
     { degree: "", institute: "", date: "" },
+  ]);
+
+  const [experiences, setExperiences] = useState([
+    { title: "", company: "", date: "", detail: "" },
   ]);
 
   const [skill, setSkill] = useState([{ skills: "" }]);
@@ -53,6 +60,16 @@ export const UserInfo = () => {
     setProfileDescription(currentDescription);
   };
 
+  const handleSubmitEducation = () => {
+    setEducationDetail(educations);
+  }
+  const handleSubmitSkills = () => {
+    setSkillList(skill);
+  };
+  const handleSubmitExperience = () => {
+    setExperiencesList(experiences);
+  };
+
   const handleSkillChange = (index, value) => {
     const newSkills = [...skill];
     if (newSkills[index]) {
@@ -60,6 +77,22 @@ export const UserInfo = () => {
       setSkill(newSkills);
     }
     console.log(newSkills);
+  };
+
+  const handleAddExperience = () => {
+    setExperiences((prevExperience) => [
+      ...prevExperience,
+      { title: "", company: "", date: "", detail: "" },
+    ]);
+  };
+
+  const handleExperienceChange = (index, field, value) => {
+    const newExperience = [...experiences];
+    if (newExperience[index]) {
+      newExperience[index][field] = value;
+      setExperiences(newExperience);
+    }
+    console.log(newExperience)
   };
 
   const handleEducationChange = (index, field, value) => {
@@ -82,6 +115,12 @@ export const UserInfo = () => {
       prevEducations.filter((_, i) => i !== index)
     );
   };
+
+  const handleRemoveExperience = (index) => {
+    setExperiences((prevExperience) => 
+      prevExperience.filter((_,i) => i !== index)
+    )
+  }
   return (
     <>
       {" "}
@@ -134,6 +173,7 @@ export const UserInfo = () => {
                 handleEducationChange(index, "date", e.target.value)
               }
             />{" "}
+            <button onClick={handleSubmitEducation}>Submit</button>
             <button
               className="border bg-red-300 rounded-lg"
               onClick={() => handleRemoveEducation(index)}
@@ -158,6 +198,7 @@ export const UserInfo = () => {
               onChange={(e) => handleSkillChange(index, e.target.value)}
               className="border border-black me-5"
             />{" "}
+            <button onClick={handleSubmitSkills}>Submit</button>
             <button
               className="border bg-red-300 rounded-lg"
               onClick={() => handleRemoveSkill(index)}
@@ -174,7 +215,6 @@ export const UserInfo = () => {
           <i className="fa-solid fa-plus ms-5 me-2"></i>Add more
         </button>
         <br />
-        <NavLink to="/"> Generate My CV</NavLink>
       </div>
       <br /> <hr />
       <br />
@@ -214,10 +254,70 @@ export const UserInfo = () => {
         rows="5"
         value={currentDescription}
         onChange={(event) => setCurrentDescription(event.target.value)}
-        // setValue={setCurrentDescription}
       />
       <button onClick={handleSubmitDescription}>Submit</button>
       <br />
+      <h1>Experience</h1>
+      <br />
+      {experiences.map((experience, index) => (
+        <div key={index}>
+          <label>Job Title</label>
+          <input
+            className="border border-black"
+            type="text"
+            value={experience.title}
+            onChange={(e) =>
+              handleExperienceChange(index, "title", e.target.value)
+            }
+          />
+          <label>Name of Company </label>
+          <input
+            className="border border-black"
+            type="text"
+            value={experience.company}
+            onChange={(e) =>
+              handleExperienceChange(index, "company", e.target.value)
+            }
+          />
+          <label>Duration of work</label>
+          <input
+            className="border border-black me-5"
+            type="date"
+            value={experience.date}
+            onChange={(e) =>
+              handleExperienceChange(index, "date", e.target.value)
+            }
+          />{" "}
+          <br />
+          <label>Description of work</label>
+          <textarea
+            className=" border border-black"
+            name="detail"
+            cols="40"
+            rows="5"
+            value={experience.detail}
+            onChange={(e) =>
+              handleExperienceChange(index, "detail", e.target.value)
+            }
+          />
+          <button onClick={handleSubmitExperience}>Submit</button>
+          <button
+            className="border bg-red-300 rounded-lg"
+            onClick={() => handleRemoveExperience(index)}
+          >
+            <i className="fa-solid fa-minus ms-5 me-2"></i>Remove
+          </button>
+        </div>
+      ))}{" "}
+      <br />
+      <button
+        className="border bg-slate-300 rounded-lg"
+        onClick={handleAddExperience}
+      >
+        <i className="fa-solid fa-plus ms-5 me-2"></i>Add more
+      </button>
+      <br />
+      <NavLink to="/"> Generate My CV</NavLink>
     </>
   );
 };
