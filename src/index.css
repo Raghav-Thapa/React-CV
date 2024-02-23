@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.hover-icon {
+    /* opacity: 0; */
+    transition: opacity 0.3s ease;
+}
+
+.mb-5:hover .hover-icon {
+    opacity: 1;
+}
