@@ -165,7 +165,7 @@ const FormPage = () => {
                 //   value={currentLocation}
                 //   setValue={setCurrentLocation}
                 //   handleSubmit={handleSubmitLocation}
-              />{" "}
+              />
               <br />
               <div className="ms-10 mt-5">
                 <h1 className="me-5 mb-1 capitalize font-serif text-stone-700 text-md">
