@@ -158,7 +158,9 @@ const FormPage = () => {
               }`}
             ></i>
           </div>
-          <NavLink to="/"> Generate My CV</NavLink>
+          <div className="ms-3 mt-5 bg-stone-100 w-1/2 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-stone-300">
+            <NavLink to="/"> Generate My CV</NavLink>
+          </div>
         </div>
       </div>
       <div className="w-3/4 h-screen bg-stone-50 ">

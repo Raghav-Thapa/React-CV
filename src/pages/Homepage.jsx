@@ -36,6 +36,9 @@ const HomePage = () => {
     <>
       <div className="flex">
         <div className="w-1/4 h-screen bg-stone-300">
+          <NavLink to="/form">
+            <i class="fa-solid fa-pen-to-square fa-lg absolute ms-3 mt-5 cursor-pointer"></i>
+          </NavLink>
           <div className=" ms-32 mt-28 font-serif text-stone-700 text-6xl flex flex-col items-start">
             <h1 className="uppercase">{fullName}</h1>
             <h1>NAME</h1>
@@ -58,7 +61,8 @@ const HomePage = () => {
                   Name of Institute {eduDetail.institute}
                 </h3>
                 <h3 className="font-serif text-stone-600 text-md">
-                  2018-2022{eduDetail.date.split("-")[0]}
+                  2018-2022 {eduDetail.date.split("-")[0]} -{" "}
+                  {eduDetail.date.split("-")[0]}
                 </h3>
               </div>
             ))}
@@ -122,6 +126,7 @@ const HomePage = () => {
                 </h3>
                 <h3 className="font-serif text-stone-600 text-lg">
                   Company Name {expList.company}| 2018-2023
+                  {expList.date.split("-")[0]} - {expList.date.split("-")[0]}
                 </h3>
                 <p className="mt-1">
                   {expList.detail}
@@ -136,14 +141,6 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <NavLink to="/addinfo">
-        {" "}
-        <button>Add details</button>
-      </NavLink>
-      <br />
-      <h1>my name is {fullName}</h1>
-      <h1>my role is {role}</h1>
-      <button onClick={handleDownload}>Download</button>
     </>
   );
 };
