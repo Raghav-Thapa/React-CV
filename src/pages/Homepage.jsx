@@ -47,7 +47,7 @@ const handleDownload = () => {
       <div className="flex" id="content">
         <div className="w-1/4 bg-stone-300 min-h-screen">
           <div className="absolute">
-            <NavLink to="/form">
+            <NavLink to="/">
               <i className="fa-solid fa-pen-to-square fa-lg ms-3 mt-5 cursor-pointer"></i>
             </NavLink>{" "}
             <button onClick={handleDownload}>

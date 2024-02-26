@@ -46,10 +46,8 @@ const Routing = () => {
       >
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/addinfo" element={<UserInfo />}/>
-            <Route path="/form" element={<FormPage/>}/>
-            <Route path="/e" element= {<EditPage/>}/>
+            <Route path="/" element={<FormPage/>}/>
+            <Route path="/cv" element={<HomePage />} />
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

@@ -183,7 +183,7 @@ const FormPage = () => {
             ></i>
           </div>
           <NavLink
-            to="/"
+            to="/cv"
             className="ms-3 mt-5 bg-stone-100 w-1/2 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-stone-300"
           >
             Generate My CV
