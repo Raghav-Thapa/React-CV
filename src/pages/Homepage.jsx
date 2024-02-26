@@ -32,12 +32,16 @@ const HomePage = () => {
   } = useContext(UserContext);
   return (
     <>
-      <div className="flex" id="content" >
-        <div className="w-1/4 bg-stone-300" >
-          <button onClick={handleDownload}>downloda</button>
-          <NavLink to="/form">
-            <i className="fa-solid fa-pen-to-square fa-lg absolute ms-3 mt-5 cursor-pointer"></i>
-          </NavLink>
+      <div className="flex" id="content">
+        <div className="w-1/4 bg-stone-300 min-h-screen">
+          <div className="absolute">
+            <NavLink to="/form">
+              <i className="fa-solid fa-pen-to-square fa-lg ms-3 mt-5 cursor-pointer"></i>
+            </NavLink>{" "}
+            <button onClick={handleDownload}>
+              <i class="fa-solid fa-file-arrow-down fa-lg  ms-3 mt-5 cursor-pointer"></i>
+            </button>
+          </div>
           <div className=" ms-32 mt-28 font-serif text-stone-700 text-6xl flex flex-col items-start">
             <h1 className="uppercase">{fullName}</h1>
             <h1>NAME</h1>

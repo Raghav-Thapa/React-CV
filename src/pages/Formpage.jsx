@@ -64,6 +64,7 @@ const FormPage = () => {
     setNumber(currentNumber);
     setLocation(currentLocation);
     setProfileDescription(currentDescription);
+    handleEducationClick();
   };
   const handleEducationChange = (index, field, value) => {
     const newEducations = [...educations];
@@ -87,6 +88,7 @@ const FormPage = () => {
   };
   const handleSubmitEducation = () => {
     setEducationDetail(educations);
+    handleExperienceClick();
   };
   const handleAddSkill = () => {
     setSkill((prevSkills) => [...prevSkills, { skills: "" }]);
@@ -130,6 +132,7 @@ const FormPage = () => {
       prevExperience.filter((_, i) => i !== index)
     );
   };
+
   return (
     <div className="flex">
       <div className="w-1/4 h-screen bg-stone-200">
