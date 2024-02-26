@@ -22,6 +22,11 @@ const FormPage = () => {
     { degree: "", institute: "", date: "" },
   ]);
 
+  const [skill, setSkill] = useState([{ skills: "" }]);
+
+  const [experiences, setExperiences] = useState([
+    { title: "", company: "", date: "", detail: "" },
+  ]);
   const handlePersonalClick = () => {
     setPersonal(true);
     setEducation(false);
@@ -61,6 +66,48 @@ const FormPage = () => {
   };
   const handleSubmitEducation = () => {
     setEducationDetail(educations);
+  };
+  const handleAddSkill = () => {
+    setSkill((prevSkills) => [...prevSkills, { skills: "" }]);
+  };
+  const handleRemoveSkill = (index) => {
+    setSkill((prevSkill) => prevSkill.filter((_, i) => i !== index));
+  };
+
+  const handleSkillChange = (index, value) => {
+    const newSkills = [...skill];
+    if (newSkills[index]) {
+      newSkills[index].skills = value;
+      setSkill(newSkills);
+    }
+    console.log(newSkills);
+  };
+  const handleSubmitSkills = () => {
+    setSkillList(skill);
+  };
+  const handleSubmitExperience = () => {
+    setExperiencesList(experiences);
+  };
+
+  const handleAddExperience = () => {
+    setExperiences((prevExperience) => [
+      ...prevExperience,
+      { title: "", company: "", date: "", detail: "" },
+    ]);
+  };
+
+  const handleExperienceChange = (index, field, value) => {
+    const newExperience = [...experiences];
+    if (newExperience[index]) {
+      newExperience[index][field] = value;
+      setExperiences(newExperience);
+    }
+    console.log(newExperience);
+  };
+  const handleRemoveExperience = (index) => {
+    setExperiences((prevExperience) =>
+      prevExperience.filter((_, i) => i !== index)
+    );
   };
   return (
     <div className="flex">
@@ -303,10 +350,191 @@ const FormPage = () => {
           </div>
         )}
         {experience && (
-          <div>
-            <h1 className=" bg-stone-200  text-center p-7 mb-16 font-serif text-stone-800 text-2xl uppercase">
-              Skills and Experiences
-            </h1>
+          <div className="h-screen">
+            <div>
+              <h1 className=" bg-stone-200  text-center p-7 mb-16 font-serif text-stone-800 text-2xl uppercase">
+                Skills and Experiences
+              </h1>
+            </div>
+            <div className="h-4/5 overflow-scroll overflow-x-hidden">
+              <div className="rounded-l-lg w-full">
+                <h1 className="me-5 ms-10 capitalize font-serif text-stone-700 text-xl">
+                  List Your Skills:
+                </h1>
+              </div>
+              <div className="border border-slate-300 ms-10 mt-5 lg:w-4/5 grid grid-cols-4 gap-3 rounded-lg">
+                {skill.map((skil, index) => (
+                  <div className="" key={index}>
+                    <input
+                      placeholder="Add your skill"
+                      type="text"
+                      value={skil.skills}
+                      onChange={(e) => handleSkillChange(index, e.target.value)}
+                      className="ps-5 h-11 me-2 rounded-r-lg  bg-transparent border"
+                    />{" "}
+                    <button
+                      className="rounded-lg"
+                      onClick={() => handleRemoveSkill(index)}
+                    >
+                      <i className="fa-solid fa-trash ms-2 me-2"></i>
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <button
+                className="ms-10 mt-10 bg-stone-200 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-stone-300"
+                onClick={handleAddSkill}
+              >
+                <i className="fa-solid fa-plus ms-5 me-2"></i>Add more
+              </button>
+              <button
+                className="ms-10 mt-7 bg-green-200 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-green-300"
+                onClick={handleSubmitSkills}
+              >
+                Submit
+              </button>
+              <hr className="mt-5 h-0.5 bg-stone-300" />
+              <div className=" mt-7 rounded-l-lg w-full">
+                <h1 className="me-5 ms-10 capitalize font-serif text-stone-700 text-xl">
+                  List Your Experiences:
+                </h1>
+              </div>
+              <div className="">
+                {experiences.map((experience, index) => (
+                  <div key={index}>
+                    <div className="grid grid-cols-2 " key={index}>
+                      <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
+                        <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
+                          <label className="me-5 capitalize font-serif text-stone-700 text-md">
+                            Job Title
+                          </label>
+                        </div>
+                        <div className="bg-stone-100 w-2/3  rounded-r-lg ">
+                          <input
+                            className="ps-4 h-full rounded-r-lg w-full bg-transparent"
+                            placeholder="name of degree"
+                            type="text"
+                            value={experience.title}
+                            onChange={(e) =>
+                              handleExperienceChange(
+                                index,
+                                "title",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
+                        <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
+                          <label className="me-5 capitalize font-serif text-stone-700 text-md">
+                            Name of Company
+                          </label>
+                        </div>{" "}
+                        <div className="bg-stone-100 w-2/3  rounded-r-lg ">
+                          <input
+                            className="ps-4 h-full rounded-r-lg w-full bg-transparent"
+                            placeholder="name of institute"
+                            type="text"
+                            value={experience.company}
+                            onChange={(e) =>
+                              handleExperienceChange(
+                                index,
+                                "company",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
+                        <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
+                          <label className="me-5 capitalize font-serif text-stone-700 text-md">
+                            Duration of work
+                          </label>
+                        </div>
+                        <div className="bg-stone-100 w-2/3  rounded-r-lg ">
+                          <input
+                            className="bg-stone-100 w-2/3 ps-10 pt-3  rounded-r-lg"
+                            type="date"
+                            value={experience.date}
+                            onChange={(e) =>
+                              handleExperienceChange(
+                                index,
+                                "date",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
+                        <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
+                          <label className="me-5 capitalize font-serif text-stone-700 text-md">
+                            End Date
+                          </label>
+                        </div>
+                        <div className="bg-stone-100 w-2/3  rounded-r-lg ">
+                          <input
+                            className="bg-stone-100 w-2/3 ps-10 pt-3  rounded-r-lg"
+                            type="date"
+                            value={experience.date}
+                            onChange={(e) =>
+                              handleExperienceChange(
+                                index,
+                                "date",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="ms-10 mt-5">
+                        <h1 className="me-5 mb-1 capitalize font-serif text-stone-700 text-md">
+                          Descriptioon of work
+                        </h1>
+                        <textarea
+                          placeholder="describe about yourself in short"
+                          className=" border border-black ps-3 pt-1"
+                          name="about"
+                          cols="90"
+                          rows="5"
+                          value={experience.detail}
+                          onChange={(e) =>
+                            handleExperienceChange(
+                              index,
+                              "detail",
+                              e.target.value
+                            )
+                          }
+                        />
+                      </div>
+                      <br />
+                      <button
+                        className="w-1/4 ms-10 mt-3 bg-red-200 p-2 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-stone-300"
+                        onClick={() => handleRemoveExperience(index)}
+                      >
+                        <i className="fa-solid fa-minus ms-5 me-2"></i>Remove
+                      </button>
+                    </div>
+                    <hr className="h-0.5 mt-5 mb-2 bg-stone-300" />
+                  </div>
+                ))}
+
+                <button
+                  className="ms-10 mt-10 bg-stone-200 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-stone-300"
+                  onClick={handleAddExperience}
+                >
+                  <i className="fa-solid fa-plus ms-5 me-2"></i>Add more
+                </button>
+                <button
+                  className="ms-10 mt-10 bg-green-200 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-green-300"
+                  onClick={handleSubmitExperience}
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>

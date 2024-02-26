@@ -68,7 +68,7 @@ const HomePage = () => {
             <h1 className="mb-3 font-serif text-stone-800 text-2xl">SKILLS</h1>
             {skillList.map((skill, index) => (
               <div key={index}>
-                <h3 className="font-serif text-stone-600 text-lg">
+                <h3 className="font-serif text-stone-600 text-lg capitalize">
                   {skill.skills}skillone
                 </h3>
               </div>
