@@ -14,11 +14,11 @@ const Routing = () => {
   const [location, setLocation] = useState("");
   const [profileDescription, setProfileDescription] = useState("");
   const [educationDetail, setEducationDetail] = useState([
-    { degree: "", institute: "", date: "" },
+    { degree: "", institute: "", startDate: "", endDate: "" },
   ]);
   const [skillList, setSkillList] = useState([{ skills: "" }]);
   const [experiencesList, setExperiencesList] = useState([
-    { title: "", company: "", date: "", detail: "" },
+    { title: "", company: "", startDate: "", endDate: "", detail: "" },
   ]);
   return (
     <>

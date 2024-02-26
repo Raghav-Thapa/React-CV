@@ -77,7 +77,7 @@ const FormPage = () => {
   const handleAddEducation = () => {
     setEducations((prevEducations) => [
       ...prevEducations,
-      { degree: "", institute: "", date: "" },
+      { degree: "", institute: "", startDate: "", endDate: "" },
     ]);
   };
 
@@ -115,7 +115,7 @@ const FormPage = () => {
   const handleAddExperience = () => {
     setExperiences((prevExperience) => [
       ...prevExperience,
-      { title: "", company: "", date: "", detail: "" },
+      { title: "", company: "", startDate: "", endDate: "", detail: "" },
     ]);
   };
 
@@ -326,9 +326,9 @@ const FormPage = () => {
                         <input
                           className="bg-stone-100 w-2/3 ps-10 pt-3  rounded-r-lg"
                           type="date"
-                          value={education.date}
+                          value={education.startDate}
                           onChange={(e) =>
-                            handleEducationChange(index, "date", e.target.value)
+                            handleEducationChange(index, "startDate", e.target.value)
                           }
                         />
                       </div>
@@ -343,9 +343,9 @@ const FormPage = () => {
                         <input
                           className="bg-stone-100 w-2/3 ps-10 pt-3  rounded-r-lg"
                           type="date"
-                          value={education.date}
+                          value={education.endDate}
                           onChange={(e) =>
-                            handleEducationChange(index, "date", e.target.value)
+                            handleEducationChange(index, "endDate", e.target.value)
                           }
                         />
                       </div>
@@ -486,11 +486,11 @@ const FormPage = () => {
                           <input
                             className="bg-stone-100 w-2/3 ps-10 pt-3  rounded-r-lg"
                             type="date"
-                            value={experience.date}
+                            value={experience.startDate}
                             onChange={(e) =>
                               handleExperienceChange(
                                 index,
-                                "date",
+                                "startDate",
                                 e.target.value
                               )
                             }
@@ -507,11 +507,11 @@ const FormPage = () => {
                           <input
                             className="bg-stone-100 w-2/3 ps-10 pt-3  rounded-r-lg"
                             type="date"
-                            value={experience.date}
+                            value={experience.endDate}
                             onChange={(e) =>
                               handleExperienceChange(
                                 index,
-                                "date",
+                                "endDate",
                                 e.target.value
                               )
                             }
@@ -520,7 +520,7 @@ const FormPage = () => {
                       </div>
                       <div className="ms-10 mt-5">
                         <h1 className="me-5 mb-1 capitalize font-serif text-stone-700 text-md">
-                          Descriptioon of work
+                          Description of work
                         </h1>
                         <textarea
                           placeholder="describe about yourself in short"
