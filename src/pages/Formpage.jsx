@@ -32,7 +32,7 @@ const FormPage = () => {
   const [currentLocation, setCurrentLocation] = useState(location);
   const [currentDescription, setCurrentDescription] =
     useState(profileDescription);
-  const [personal, setPersonal] = useState(false);
+  const [personal, setPersonal] = useState(true);
   const [education, setEducation] = useState(false);
   const [experience, setExperience] = useState(false);
   const [educations, setEducations] = useState(educationDetail);
