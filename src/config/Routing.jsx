@@ -4,6 +4,7 @@ import { UserInfo } from "../components/InputComponents";
 import { useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import FormPage from "../pages/Formpage";
+import EditPage from "../pages/Editpage";
 
 const Routing = () => {
   const [fullName, setFullName] = useState("");
@@ -48,6 +49,7 @@ const Routing = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/addinfo" element={<UserInfo />}/>
             <Route path="/form" element={<FormPage/>}/>
+            <Route path="/e" element= {<EditPage/>}/>
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

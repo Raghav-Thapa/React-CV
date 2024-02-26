@@ -6,14 +6,12 @@ import jsPDF from "jspdf";
 
 const HomePage = () => {
   const handleDownload = () => {
-    // const contentHeight = 800;
-    html2canvas(document.body, {
-      // windowHeight: contentHeight,
-      windowWidth: document.body.scrollWidth,
-      windowHeight: document.body.scrollHeight,
+    html2canvas(document.getElementById("content"), {
+      windowWidth: document.getElementById("content").scrollWidth,
+      windowHeight: document.getElementById("content").scrollHeight,
     }).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4"); // A4 size page of PDF
+      const pdf = new jsPDF("p", "mm", "a4");
       const imgProps = pdf.getImageProperties(imgData);
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
@@ -34,10 +32,11 @@ const HomePage = () => {
   } = useContext(UserContext);
   return (
     <>
-      <div className="flex">
-        <div className="w-1/4 h-screen bg-stone-300">
+      <div className="flex" id="content" >
+        <div className="w-1/4 bg-stone-300" >
+          <button onClick={handleDownload}>downloda</button>
           <NavLink to="/form">
-            <i class="fa-solid fa-pen-to-square fa-lg absolute ms-3 mt-5 cursor-pointer"></i>
+            <i className="fa-solid fa-pen-to-square fa-lg absolute ms-3 mt-5 cursor-pointer"></i>
           </NavLink>
           <div className=" ms-32 mt-28 font-serif text-stone-700 text-6xl flex flex-col items-start">
             <h1 className="uppercase">{fullName}</h1>

@@ -5,6 +5,15 @@ import { NavLink } from "react-router-dom";
 
 const FormPage = () => {
   const {
+    fullName,
+    role,
+    email,
+    location,
+    number,
+    profileDescription,
+    educationDetail,
+    skillList,
+    experiencesList,
     setFullName,
     setRole,
     setEmail,
@@ -15,18 +24,22 @@ const FormPage = () => {
     setSkillList,
     setExperiencesList,
   } = useContext(UserContext);
+
+  const [name, setName] = useState(fullName);
+  const [currentRole, setCurrentRole] = useState(role);
+  const [currentEmail, setCurrentEmail] = useState(email);
+  const [currentNumber, setCurrentNumber] = useState(number);
+  const [currentLocation, setCurrentLocation] = useState(location);
+  const [currentDescription, setCurrentDescription] =
+    useState(profileDescription);
   const [personal, setPersonal] = useState(false);
   const [education, setEducation] = useState(false);
   const [experience, setExperience] = useState(false);
-  const [educations, setEducations] = useState([
-    { degree: "", institute: "", date: "" },
-  ]);
+  const [educations, setEducations] = useState(educationDetail);
 
-  const [skill, setSkill] = useState([{ skills: "" }]);
+  const [skill, setSkill] = useState(skillList);
 
-  const [experiences, setExperiences] = useState([
-    { title: "", company: "", date: "", detail: "" },
-  ]);
+  const [experiences, setExperiences] = useState(experiencesList);
   const handlePersonalClick = () => {
     setPersonal(true);
     setEducation(false);
@@ -44,6 +57,14 @@ const FormPage = () => {
     setEducation(false);
   };
 
+  const handlePersonalDetailSubmit = () => {
+    setFullName(name);
+    setRole(currentRole);
+    setEmail(currentEmail);
+    setNumber(currentNumber);
+    setLocation(currentLocation);
+    setProfileDescription(currentDescription);
+  };
   const handleEducationChange = (index, field, value) => {
     const newEducations = [...educations];
     if (newEducations[index]) {
@@ -158,9 +179,12 @@ const FormPage = () => {
               }`}
             ></i>
           </div>
-          <div className="ms-3 mt-5 bg-stone-100 w-1/2 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-stone-300">
-            <NavLink to="/"> Generate My CV</NavLink>
-          </div>
+          <NavLink
+            to="/"
+            className="ms-3 mt-5 bg-stone-100 w-1/2 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-stone-300"
+          >
+            Generate My CV
+          </NavLink>
         </div>
       </div>
       <div className="w-3/4 h-screen bg-stone-50 ">
@@ -175,45 +199,40 @@ const FormPage = () => {
                 type={"text"}
                 name={"name"}
                 placeholder={"enter your full name"}
-                //   value={name}
-                //   setValue={setName}
-                //   handleSubmit={handleSubmitFirstName}
+                value={name}
+                setValue={setName}
               />
               <TextField
                 title={"Job Role"}
                 type={"text"}
                 name={"role"}
                 placeholder={"enter your job role or title"}
-                //   value={currentRole}
-                //   setValue={setCurrentRole}
-                //   handleSubmit={handleSubmitRole}
+                value={currentRole}
+                setValue={setCurrentRole}
               />
               <TextField
                 title={"Email"}
                 type={"email"}
                 name={"email"}
                 placeholder={"enter your email address"}
-                //   value={currentEmail}
-                //   setValue={setCurrentEmail}
-                //   handleSubmit={handleSubmitEmail}
+                value={currentEmail}
+                setValue={setCurrentEmail}
               />
               <TextField
                 title={"Phonenumber"}
                 type={"text"}
                 name={"text"}
                 placeholder={"enter your phone number"}
-                //   value={currentNumber}
-                //   setValue={setCurrentNumber}
-                //   handleSubmit={handleSubmitNumber}
+                value={currentNumber}
+                setValue={setCurrentNumber}
               />
               <TextField
                 title={"Address"}
                 type={"text"}
                 name={"text"}
                 placeholder={"enter your current address"}
-                //   value={currentLocation}
-                //   setValue={setCurrentLocation}
-                //   handleSubmit={handleSubmitLocation}
+                value={currentLocation}
+                setValue={setCurrentLocation}
               />
               <br />
               <div className="ms-10 mt-5">
@@ -226,12 +245,17 @@ const FormPage = () => {
                   name="about"
                   cols="90"
                   rows="5"
-                  //   value={currentDescription}
-                  //   onChange={(event) => setCurrentDescription(event.target.value)}
+                  value={currentDescription}
+                  onChange={(event) =>
+                    setCurrentDescription(event.target.value)
+                  }
                 />
               </div>
             </div>
-            <button className="ms-10 mt-10 bg-green-200 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-green-300">
+            <button
+              onClick={handlePersonalDetailSubmit}
+              className="ms-10 mt-10 bg-green-200 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-green-300"
+            >
               Submit
             </button>
           </div>
@@ -452,7 +476,7 @@ const FormPage = () => {
                       <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
                         <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
                           <label className="me-5 capitalize font-serif text-stone-700 text-md">
-                            Duration of work
+                            Start Date
                           </label>
                         </div>
                         <div className="bg-stone-100 w-2/3  rounded-r-lg ">
