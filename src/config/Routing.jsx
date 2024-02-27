@@ -3,7 +3,6 @@ import HomePage from "../pages/Homepage";
 import { useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import FormPage from "../pages/Formpage";
-import EditPage from "../pages/Editpage";
 
 const Routing = () => {
   const [fullName, setFullName] = useState("");

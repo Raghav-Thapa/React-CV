@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Button, TextField } from "../components/FormComponent";
+import { Button, InputField, TextField } from "../components/FormComponent";
 import { UserContext } from "../contexts/UserContext";
 import { NavLink } from "react-router-dom";
 import { Sidebar } from "../components/FormComponent";
@@ -243,93 +243,50 @@ const FormPage = () => {
               {educations.map((education, index) => (
                 <div key={index}>
                   <div className="grid grid-cols-2 " key={index}>
-                    <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
-                      <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
-                        <label className="me-5 capitalize font-serif text-stone-700 text-md">
-                          Name of Degree
-                        </label>
-                      </div>
-                      <div className="bg-stone-100 w-2/3  rounded-r-lg ">
-                        <input
-                          className="ps-4 h-full rounded-r-lg w-full bg-transparent"
-                          placeholder="name of degree"
-                          type="text"
-                          value={education.degree}
-                          onChange={(e) =>
-                            handleEducationChange(
-                              index,
-                              "degree",
-                              e.target.value
-                            )
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
-                      <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
-                        <label className="me-5 capitalize font-serif text-stone-700 text-md">
-                          Name of Institute
-                        </label>
-                      </div>{" "}
-                      <div className="bg-stone-100 w-2/3  rounded-r-lg ">
-                        <input
-                          className="ps-4 h-full rounded-r-lg w-full bg-transparent"
-                          placeholder="name of institute"
-                          type="text"
-                          value={education.institute}
-                          onChange={(e) =>
-                            handleEducationChange(
-                              index,
-                              "institute",
-                              e.target.value
-                            )
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
-                      <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
-                        <label className="me-5 capitalize font-serif text-stone-700 text-md">
-                          Start Date
-                        </label>
-                      </div>
-                      <div className="bg-stone-100 w-2/3  rounded-r-lg ">
-                        <input
-                          className="bg-stone-100 w-2/3 ps-10 pt-3  rounded-r-lg"
-                          type="date"
-                          value={education.startDate}
-                          onChange={(e) =>
-                            handleEducationChange(
-                              index,
-                              "startDate",
-                              e.target.value
-                            )
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
-                      <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
-                        <label className="me-5 capitalize font-serif text-stone-700 text-md">
-                          End Date
-                        </label>
-                      </div>
-                      <div className="bg-stone-100 w-2/3  rounded-r-lg ">
-                        <input
-                          className="bg-stone-100 w-2/3 ps-10 pt-3  rounded-r-lg"
-                          type="date"
-                          value={education.endDate}
-                          onChange={(e) =>
-                            handleEducationChange(
-                              index,
-                              "endDate",
-                              e.target.value
-                            )
-                          }
-                        />
-                      </div>
-                    </div>
-
+                    <InputField
+                      labelText="Name of Degree"
+                      placeHolder="name of degree"
+                      type="text"
+                      eduValue={education.degree}
+                      handleChangee={(e) =>
+                        handleEducationChange(index, "degree", e.target.value)
+                      }
+                    />
+                    <InputField
+                      labelText="Name of Institute"
+                      placeHolder="name of institute"
+                      type="text"
+                      eduValue={education.institute}
+                      handleChangee={(e) =>
+                        handleEducationChange(
+                          index,
+                          "institute",
+                          e.target.value
+                        )
+                      }
+                    />
+                    <InputField
+                      labelText="Start Date"
+                      placeHolder="start date"
+                      type="date"
+                      eduValue={education.startDate}
+                      handleChangee={(e) =>
+                        handleEducationChange(
+                          index,
+                          "startDate",
+                          e.target.value
+                        )
+                      }
+                    />
+                    <InputField
+                      labelText="End Date"
+                      placeHolder="end date"
+                      type="date"
+                      eduValue={education.endDate}
+                      handleChangee={(e) =>
+                        handleEducationChange(index, "endDate", e.target.value)
+                      }
+                    />
                     <button
                       className="w-1/4 ms-10 mt-7 bg-red-200 p-2 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-stone-300"
                       onClick={() => handleRemoveEducation(index)}
@@ -401,92 +358,54 @@ const FormPage = () => {
                 {experiences.map((experience, index) => (
                   <div key={index}>
                     <div className="grid grid-cols-2 " key={index}>
-                      <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
-                        <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
-                          <label className="me-5 capitalize font-serif text-stone-700 text-md">
-                            Job Title
-                          </label>
-                        </div>
-                        <div className="bg-stone-100 w-2/3  rounded-r-lg ">
-                          <input
-                            className="ps-4 h-full rounded-r-lg w-full bg-transparent"
-                            placeholder="title of your job"
-                            type="text"
-                            value={experience.title}
-                            onChange={(e) =>
-                              handleExperienceChange(
-                                index,
-                                "title",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
-                        <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
-                          <label className="me-5 capitalize font-serif text-stone-700 text-md">
-                            Name of Company
-                          </label>
-                        </div>{" "}
-                        <div className="bg-stone-100 w-2/3  rounded-r-lg ">
-                          <input
-                            className="ps-4 h-full rounded-r-lg w-full bg-transparent"
-                            placeholder="name of company"
-                            type="text"
-                            value={experience.company}
-                            onChange={(e) =>
-                              handleExperienceChange(
-                                index,
-                                "company",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
-                        <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
-                          <label className="me-5 capitalize font-serif text-stone-700 text-md">
-                            Start Date
-                          </label>
-                        </div>
-                        <div className="bg-stone-100 w-2/3  rounded-r-lg ">
-                          <input
-                            className="bg-stone-100 w-2/3 ps-10 pt-3  rounded-r-lg"
-                            type="date"
-                            value={experience.startDate}
-                            onChange={(e) =>
-                              handleExperienceChange(
-                                index,
-                                "startDate",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
-                        <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
-                          <label className="me-5 capitalize font-serif text-stone-700 text-md">
-                            End Date
-                          </label>
-                        </div>
-                        <div className="bg-stone-100 w-2/3  rounded-r-lg ">
-                          <input
-                            className="bg-stone-100 w-2/3 ps-10 pt-3  rounded-r-lg"
-                            type="date"
-                            value={experience.endDate}
-                            onChange={(e) =>
-                              handleExperienceChange(
-                                index,
-                                "endDate",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
-                      </div>
+                      <InputField
+                        labelText="Job Title"
+                        placeHolder="title of your job"
+                        type="text"
+                        eduValue={experience.title}
+                        handleChangee={(e) =>
+                          handleExperienceChange(index, "title", e.target.value)
+                        }
+                      />
+                      <InputField
+                        labelText="Name of Company"
+                        placeHolder="name of company"
+                        type="text"
+                        eduValue={experience.company}
+                        handleChangee={(e) =>
+                          handleExperienceChange(
+                            index,
+                            "company",
+                            e.target.value
+                          )
+                        }
+                      />
+                      <InputField
+                        labelText="Start Date"
+                        placeHolder="start date"
+                        type="date"
+                        eduValue={experience.startDate}
+                        handleChangee={(e) =>
+                          handleExperienceChange(
+                            index,
+                            "startDate",
+                            e.target.value
+                          )
+                        }
+                      />
+                      <InputField
+                        labelText="End Date"
+                        placeHolder="end date"
+                        type="date"
+                        eduValue={experience.endDate}
+                        handleChangee={(e) =>
+                          handleExperienceChange(
+                            index,
+                            "endDate",
+                            e.target.value
+                          )
+                        }
+                      />
                       <div className="ms-10 mt-5">
                         <h1 className="me-5 mb-1 capitalize font-serif text-stone-700 text-md">
                           Description of work
