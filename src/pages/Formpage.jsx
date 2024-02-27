@@ -6,6 +6,8 @@ import { Sidebar } from "../components/FormComponent";
 
 const FormPage = () => {
   const {
+    profileImage,
+    setProfileImage,
     fullName,
     role,
     email,
@@ -56,7 +58,9 @@ const FormPage = () => {
     setNumber(currentNumber);
     setLocation(currentLocation);
     setProfileDescription(currentDescription);
+    setProfileImage(photoUrl);
     handleFormClick("education");
+    
   };
   const handleEducationChange = (index, field, value) => {
     const newEducations = [...educations];
@@ -123,6 +127,14 @@ const FormPage = () => {
       prevExperience.filter((_, i) => i !== index)
     );
   };
+ const [photo, setPhoto] = useState(profileImage);
+const [photoUrl, setPhotoUrl] = useState(profileImage);
+
+ const handlePhotoChange = (event) => {
+   setPhoto(event.target.files[0]);
+   setPhotoUrl(URL.createObjectURL(event.target.files[0]));
+   console.log(event.target.files[0]);
+ };
 
   return (
     <div className="flex">
@@ -208,8 +220,12 @@ const FormPage = () => {
                 placeholder={"enter your current address"}
                 value={currentLocation}
                 setValue={setCurrentLocation}
+              />{" "}
+              <input
+                className="mt-5 ms-10 h-full rounded-r-lg w-full bg-transparent "
+                type="file"
+                onChange={handlePhotoChange}
               />
-              <br />
               <div className="ms-10 mt-5">
                 <h1 className="me-5 mb-1 capitalize font-serif text-stone-700 text-md">
                   Write in short about yourself
@@ -218,13 +234,24 @@ const FormPage = () => {
                   placeholder="describe about yourself in short"
                   className=" border border-black ps-3 pt-1"
                   name="about"
-                  cols="90"
+                  cols="80"
                   rows="5"
                   value={currentDescription}
                   onChange={(event) =>
                     setCurrentDescription(event.target.value)
                   }
                 />
+              </div>
+              <div className="justify-self-center">
+                {photoUrl && (
+                  <img
+                    className=" rounded-3xl"
+                    height={200}
+                    width={150}
+                    src={photoUrl}
+                    alt="Selected"
+                  />
+                )}
               </div>
             </div>
             <Button

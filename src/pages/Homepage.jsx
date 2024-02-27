@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import userImage from "../assets/user.png";
 import {
   ContactInfo,
   ProfileSection,
@@ -39,6 +40,7 @@ const HomePage = () => {
     });
   };
   const {
+    profileImage,
     fullName,
     role,
     email,
@@ -61,7 +63,7 @@ const HomePage = () => {
               <i className="fa-solid fa-file-arrow-down fa-lg  ms-3 mt-5 cursor-pointer"></i>
             </button>
           </div>
-          <div className=" ms-32 mt-28 font-serif text-stone-700 text-6xl flex flex-col items-start">
+          <div className=" ms-32 mt-32 font-serif text-stone-700 text-6xl flex flex-col items-start">
             <h1 className="uppercase">
               {fullName ? fullName : <span>NAME</span>}
             </h1>
@@ -79,24 +81,45 @@ const HomePage = () => {
           </div>
         </div>
         <div className="w-3/4">
-          <div className=" bg-stone-300 w-1/4 ps-24 p-5 rounded-bl-full float-end">
-            <ContactInfo
-              icon="fa-envelope"
-              info={email}
-              defaultInfo="hello@gmail.com"
-            />
-            <ContactInfo
-              icon="fa-mobile-screen-button"
-              info={number}
-              defaultInfo="+977-9999999999"
-            />
-            <ContactInfo
-              icon="fa-location-dot"
-              info={location}
-              defaultInfo="Kathmandu, Nepal"
-            />
+          <div className="flex justify-between">
+            <div className="bg-stone-300 h-1/2 rounded-br-full rounded-bl-full">
+              {profileImage ? (
+                <img
+                  height={500}
+                  width={200}
+                  className="rounded-br-full rounded-bl-full"
+                  src={profileImage}
+                  alt="Profile picture"
+                />
+              ) : (
+                <img
+                  className="rounded-br-full rounded-bl-full"
+                  height={500}
+                  width={200}
+                  src={userImage}
+                  alt=""
+                />
+              )}
+            </div>
+            <div className=" bg-stone-300 w-1/3 h-1/2 ps-32 p-10 rounded-bl-full float-end">
+              <ContactInfo
+                icon="fa-envelope"
+                info={email}
+                defaultInfo="hello@gmail.com"
+              />
+              <ContactInfo
+                icon="fa-mobile-screen-button"
+                info={number}
+                defaultInfo="+977-9999999999"
+              />
+              <ContactInfo
+                icon="fa-location-dot"
+                info={location}
+                defaultInfo="Kathmandu, Nepal"
+              />
+            </div>
           </div>
-          <div className="mt-32">
+          <div className="mt-16">
             <ProfileSection
               title="PROFILE"
               description={profileDescription}

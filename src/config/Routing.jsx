@@ -18,10 +18,14 @@ const Routing = () => {
   const [experiencesList, setExperiencesList] = useState([
     { title: "", company: "", startDate: "", endDate: "", detail: "" },
   ]);
+
+  const [profileImage, setProfileImage] = useState(null);
   return (
     <>
       <UserContext.Provider
         value={{
+          profileImage,
+          setProfileImage,
           fullName,
           setFullName,
           role,
@@ -44,7 +48,7 @@ const Routing = () => {
       >
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<FormPage/>}/>
+            <Route path="/" element={<FormPage />} />
             <Route path="/cv" element={<HomePage />} />
           </Routes>
         </BrowserRouter>
