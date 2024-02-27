@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
-import { TextField } from "../components/TextFieldComponent";
+import { Button, TextField } from "../components/FormComponent";
 import { UserContext } from "../contexts/UserContext";
 import { NavLink } from "react-router-dom";
+import { Sidebar } from "../components/FormComponent";
 
 const FormPage = () => {
   const {
@@ -40,21 +41,12 @@ const FormPage = () => {
   const [skill, setSkill] = useState(skillList);
 
   const [experiences, setExperiences] = useState(experiencesList);
-  const handlePersonalClick = () => {
-    setPersonal(true);
-    setEducation(false);
-    setExperience(false);
-  };
-  const handleEducationClick = () => {
-    setEducation(true);
-    setPersonal(false);
-    setExperience(false);
-  };
+  const [generateCv, setGenerateCv] = useState(false);
 
-  const handleExperienceClick = () => {
-    setExperience(true);
-    setPersonal(false);
-    setEducation(false);
+  const handleFormClick = (formType) => {
+    setPersonal(formType === "personal");
+    setEducation(formType === "education");
+    setExperience(formType === "experience");
   };
 
   const handlePersonalDetailSubmit = () => {
@@ -64,7 +56,7 @@ const FormPage = () => {
     setNumber(currentNumber);
     setLocation(currentLocation);
     setProfileDescription(currentDescription);
-    handleEducationClick();
+    handleFormClick("education");
   };
   const handleEducationChange = (index, field, value) => {
     const newEducations = [...educations];
@@ -88,7 +80,7 @@ const FormPage = () => {
   };
   const handleSubmitEducation = () => {
     setEducationDetail(educations);
-    handleExperienceClick();
+    handleFormClick("experience");
   };
   const handleAddSkill = () => {
     setSkill((prevSkills) => [...prevSkills, { skills: "" }]);
@@ -105,11 +97,10 @@ const FormPage = () => {
     }
     console.log(newSkills);
   };
-  const handleSubmitSkills = () => {
-    setSkillList(skill);
-  };
   const handleSubmitExperience = () => {
     setExperiencesList(experiences);
+    setSkillList(skill);
+    setGenerateCv(true);
   };
 
   const handleAddExperience = () => {
@@ -143,48 +134,29 @@ const FormPage = () => {
           <hr className="h-0.5 bg-black mt-3" />
         </div>
         <div className="flex flex-col ms-16 capitalize text-xl font-serif text-stone-600 mt-12">
-          <div
-            onClick={handlePersonalClick}
-            className={`mb-5 p-4 cursor-pointer hover:bg-stone-50 ${
-              personal ? "bg-stone-50" : ""
-            }`}
-          >
-            <i className="fa-solid fa-user me-3"></i>Personal Information
-            <i
-              className={`fa-solid fa-chevron-right float-end hover-icon ${
-                personal ? "opacity-100" : " opacity-0"
-              }`}
-            ></i>
-          </div>
-          <div
-            onClick={handleEducationClick}
-            className={`mb-5 p-4 cursor-pointer hover:bg-stone-50 ${
-              education ? "bg-stone-50" : ""
-            }`}
-          >
-            <i className="fa-solid fa-book me-3"></i>Education Background
-            <i
-              className={`fa-solid fa-chevron-right float-end hover-icon ${
-                education ? "opacity-100" : " opacity-0"
-              }`}
-            ></i>
-          </div>
-          <div
-            onClick={handleExperienceClick}
-            className={`mb-5 p-4 cursor-pointer hover:bg-stone-50 ${
-              experience ? "bg-stone-50" : ""
-            }`}
-          >
-            <i className="fa-solid fa-brain me-3"></i>Skills and Experiences
-            <i
-              className={`fa-solid fa-chevron-right float-end hover-icon ${
-                experience ? "opacity-100" : " opacity-0"
-              }`}
-            ></i>
-          </div>
+          <Sidebar
+            onClick={() => handleFormClick("personal")}
+            active={personal}
+            icon="fa-user"
+            title="Personal Information"
+          />
+          <Sidebar
+            onClick={() => handleFormClick("education")}
+            active={education}
+            icon="fa-book"
+            title="Education Background"
+          />
+          <Sidebar
+            onClick={() => handleFormClick("experience")}
+            active={experience}
+            icon="fa-brain"
+            title="Skills and Experiences"
+          />
           <NavLink
             to="/cv"
-            className="ms-3 mt-5 bg-stone-100 w-1/2 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-stone-300"
+            className={`${
+              generateCv ? "bg-stone-300" : ""
+            } ms-3 mt-5 bg-stone-100 w-1/2 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-stone-300`}
           >
             Generate My CV
           </NavLink>
@@ -255,12 +227,11 @@ const FormPage = () => {
                 />
               </div>
             </div>
-            <button
-              onClick={handlePersonalDetailSubmit}
-              className="ms-10 mt-10 bg-green-200 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-green-300"
-            >
-              Submit
-            </button>
+            <Button
+              icon="fa-arrow-right"
+              handleClick={handlePersonalDetailSubmit}
+              text="Next"
+            />
           </div>
         )}
         {education && (
@@ -328,7 +299,11 @@ const FormPage = () => {
                           type="date"
                           value={education.startDate}
                           onChange={(e) =>
-                            handleEducationChange(index, "startDate", e.target.value)
+                            handleEducationChange(
+                              index,
+                              "startDate",
+                              e.target.value
+                            )
                           }
                         />
                       </div>
@@ -345,7 +320,11 @@ const FormPage = () => {
                           type="date"
                           value={education.endDate}
                           onChange={(e) =>
-                            handleEducationChange(index, "endDate", e.target.value)
+                            handleEducationChange(
+                              index,
+                              "endDate",
+                              e.target.value
+                            )
                           }
                         />
                       </div>
@@ -362,19 +341,16 @@ const FormPage = () => {
                   <hr className="h-0.5 mt-5 mb-2 bg-stone-300" />
                 </div>
               ))}
-
-              <button
-                className="ms-10 mt-10 bg-stone-200 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-stone-300"
-                onClick={handleAddEducation}
-              >
-                <i className="fa-solid fa-plus ms-5 me-2"></i>Add more
-              </button>
-              <button
-                className="ms-10 mt-10 bg-green-200 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-green-300"
-                onClick={handleSubmitEducation}
-              >
-                Submit
-              </button>
+              <Button
+                icon="fa-plus"
+                handleClick={handleAddEducation}
+                text="Add more"
+              />
+              <Button
+                icon="fa-arrow-right"
+                handleClick={handleSubmitEducation}
+                text="Next"
+              />
             </div>
           </div>
         )}
@@ -410,18 +386,11 @@ const FormPage = () => {
                   </div>
                 ))}
               </div>
-              <button
-                className="ms-10 mt-10 bg-stone-200 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-stone-300"
-                onClick={handleAddSkill}
-              >
-                <i className="fa-solid fa-plus ms-5 me-2"></i>Add more
-              </button>
-              <button
-                className="ms-10 mt-7 bg-green-200 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-green-300"
-                onClick={handleSubmitSkills}
-              >
-                Submit
-              </button>
+              <Button
+                icon="fa-plus"
+                handleClick={handleAddSkill}
+                text="Add more"
+              />
               <hr className="mt-5 h-0.5 bg-stone-300" />
               <div className=" mt-7 rounded-l-lg w-full">
                 <h1 className="me-5 ms-10 capitalize font-serif text-stone-700 text-xl">
@@ -441,7 +410,7 @@ const FormPage = () => {
                         <div className="bg-stone-100 w-2/3  rounded-r-lg ">
                           <input
                             className="ps-4 h-full rounded-r-lg w-full bg-transparent"
-                            placeholder="name of degree"
+                            placeholder="title of your job"
                             type="text"
                             value={experience.title}
                             onChange={(e) =>
@@ -463,7 +432,7 @@ const FormPage = () => {
                         <div className="bg-stone-100 w-2/3  rounded-r-lg ">
                           <input
                             className="ps-4 h-full rounded-r-lg w-full bg-transparent"
-                            placeholder="name of institute"
+                            placeholder="name of company"
                             type="text"
                             value={experience.company}
                             onChange={(e) =>
@@ -549,13 +518,11 @@ const FormPage = () => {
                     <hr className="h-0.5 mt-5 mb-2 bg-stone-300" />
                   </div>
                 ))}
-
-                <button
-                  className="ms-10 mt-10 bg-stone-200 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-stone-300"
-                  onClick={handleAddExperience}
-                >
-                  <i className="fa-solid fa-plus ms-5 me-2"></i>Add more
-                </button>
+                <Button
+                  icon="fa-plus"
+                  handleClick={handleAddExperience}
+                  text="Add more"
+                />
                 <button
                   className="ms-10 mt-10 bg-green-200 p-2 ps-7 pe-7 rounded-lg capitalize font-serif text-stone-700 text-md hover:bg-green-300"
                   onClick={handleSubmitExperience}

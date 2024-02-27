@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "../pages/Homepage";
-import { UserInfo } from "../components/InputComponents";
 import { useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import FormPage from "../pages/Formpage";
