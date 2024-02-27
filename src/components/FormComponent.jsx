@@ -19,7 +19,6 @@ export const Sidebar = ({ onClick, active, icon, title }) => {
 
 export const TextField = ({
   title,
-  handleSubmit,
   name,
   value,
   setValue,
@@ -69,7 +68,6 @@ export const InputField = ({ labelText, handleChangee, placeHolder, type, eduVal
     </>
   );
 };
-
 
 export const Button = ({ handleClick, text, icon }) => {
   return (
