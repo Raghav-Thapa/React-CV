@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 export const Sidebar = ({ onClick, active, icon, title }) => {
   return (
     <div
@@ -24,7 +26,25 @@ export const TextField = ({
   setValue,
   type,
   placeholder,
+  validation,
+  shouldShowError,
 }) => {
+  const [error, setError] = useState(null);
+
+  const handleChange = (event) => {
+    const newValue = event.target.value;
+    setValue(newValue);
+  };
+
+  const validate = () => {
+    if (shouldShowError) {
+      const errorMessage = validation(value);
+      setError(errorMessage);
+    }
+  };
+
+  useEffect(validate, [value, shouldShowError]);
+
   return (
     <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">
       <div className="bg-stone-200 p-3 ps-4 rounded-l-lg w-1/3">
@@ -34,19 +54,27 @@ export const TextField = ({
       </div>
       <div className="bg-stone-100 w-2/3  rounded-r-lg ">
         <input
-          placeholder={placeholder}
+          placeholder={error ? error : placeholder}
           className="ps-4 h-full rounded-r-lg w-full bg-transparent"
           type={type}
           name={name}
           value={value}
-          onChange={(event) => setValue(event.target.value)}
+          onChange={handleChange}
         />{" "}
+        {/* {error && <div className="text-red-500 mt-1 ">{error}</div>} */}
       </div>
       <br />
     </div>
   );
 };
-export const InputField = ({ labelText, handleChangee, placeHolder, type, eduValue}) => {
+
+export const InputField = ({
+  labelText,
+  handleChangee,
+  placeHolder,
+  type,
+  eduValue,
+}) => {
   return (
     <>
       <div className="border border-slate-300 ms-10 mt-5 w-4/5 flex rounded-lg">

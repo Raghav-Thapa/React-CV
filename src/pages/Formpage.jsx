@@ -50,8 +50,13 @@ const FormPage = () => {
     setEducation(formType === "education");
     setExperience(formType === "experience");
   };
+  const required = (value) => (value ? null : "*This field is required");
+  const numbers = (value) =>
+    value && isNaN(Number(value)) ? "Must be a number" : null;
+const [shouldShowError, setShouldShowError] = useState(false);
 
   const handlePersonalDetailSubmit = () => {
+    setShouldShowError(true);
     setFullName(name);
     setRole(currentRole);
     setEmail(currentEmail);
@@ -59,8 +64,25 @@ const FormPage = () => {
     setLocation(currentLocation);
     setProfileDescription(currentDescription);
     setProfileImage(photoUrl);
-    handleFormClick("education");
-    
+    const nameError = required(name);
+    const roleError = required(currentRole);
+    const emailError = required(currentEmail);
+    const numberError = required(currentNumber);
+    const locationError = required(currentLocation);
+    const descriptionError = required(currentDescription);
+    if (
+      nameError ||
+      roleError ||
+      emailError ||
+      numberError ||
+      locationError ||
+      descriptionError
+    ) {
+      console.log("Validation Error");
+    } else {
+      handleFormClick("education");
+      console.log("validation success");
+    }
   };
   const handleEducationChange = (index, field, value) => {
     const newEducations = [...educations];
@@ -127,14 +149,14 @@ const FormPage = () => {
       prevExperience.filter((_, i) => i !== index)
     );
   };
- const [photo, setPhoto] = useState(profileImage);
-const [photoUrl, setPhotoUrl] = useState(profileImage);
+  const [photo, setPhoto] = useState(profileImage);
+  const [photoUrl, setPhotoUrl] = useState(profileImage);
 
- const handlePhotoChange = (event) => {
-   setPhoto(event.target.files[0]);
-   setPhotoUrl(URL.createObjectURL(event.target.files[0]));
-   console.log(event.target.files[0]);
- };
+  const handlePhotoChange = (event) => {
+    setPhoto(event.target.files[0]);
+    setPhotoUrl(URL.createObjectURL(event.target.files[0]));
+    console.log(event.target.files[0]);
+  };
 
   return (
     <div className="flex">
@@ -188,6 +210,8 @@ const [photoUrl, setPhotoUrl] = useState(profileImage);
                 placeholder={"enter your full name"}
                 value={name}
                 setValue={setName}
+                validation={required}
+                shouldShowError={shouldShowError}
               />
               <TextField
                 title={"Job Role"}
@@ -196,6 +220,8 @@ const [photoUrl, setPhotoUrl] = useState(profileImage);
                 placeholder={"enter your job role or title"}
                 value={currentRole}
                 setValue={setCurrentRole}
+                validation={required}
+                shouldShowError={shouldShowError}
               />
               <TextField
                 title={"Email"}
@@ -204,6 +230,8 @@ const [photoUrl, setPhotoUrl] = useState(profileImage);
                 placeholder={"enter your email address"}
                 value={currentEmail}
                 setValue={setCurrentEmail}
+                validation={required}
+                shouldShowError={shouldShowError}
               />
               <TextField
                 title={"Phonenumber"}
@@ -212,6 +240,8 @@ const [photoUrl, setPhotoUrl] = useState(profileImage);
                 placeholder={"enter your phone number"}
                 value={currentNumber}
                 setValue={setCurrentNumber}
+                validation={numbers}
+                shouldShowError={shouldShowError}
               />
               <TextField
                 title={"Address"}
@@ -220,6 +250,8 @@ const [photoUrl, setPhotoUrl] = useState(profileImage);
                 placeholder={"enter your current address"}
                 value={currentLocation}
                 setValue={setCurrentLocation}
+                validation={required}
+                shouldShowError={shouldShowError}
               />{" "}
               <input
                 className="mt-5 ms-10 h-full rounded-r-lg w-full bg-transparent "
